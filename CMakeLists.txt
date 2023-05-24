@@ -24,7 +24,7 @@ link_directories(depend/glfw/lib)
 # Create and link executable.
 
 add_executable(ManOfDestruction
-    depend/glad/src/glad.c
+    depend/glad/src/gl.c
     source/core/audio/sound.h
     source/core/audio/sound_mixer.cpp
     source/core/audio/sound_mixer.h

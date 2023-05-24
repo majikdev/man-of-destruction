@@ -2,7 +2,7 @@
 
 #include "renderer.h"
 #include "core/logging.h"
-#include "glad/glad.h"
+#include "glad/gl.h"
 #include "glfw/glfw3.h"
 #include <fstream>
 #include <string>
@@ -96,7 +96,7 @@ Renderer::Renderer(std::string_view vertexPath, std::string_view fragmentPath)
 
     // Initialise GLAD and enable depth testing.
 
-    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+    gladLoadGL(glfwGetProcAddress);
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
