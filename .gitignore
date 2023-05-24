@@ -1,7 +1,6 @@
 .idea
 cmake-build-*
 build-*
-depend
 saves
 count_lines.py
 configuration.toml
