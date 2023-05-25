@@ -15,7 +15,7 @@
 
 **Installation steps:**
 
-1. Download the latest [release](/releases);
+1. Download the latest [release](https://github.com/majikdev/man-of-destruction/releases/latest);
 2. Extract the downloaded archive;
 3. Run `ManOfDestruction.exe`.
 
