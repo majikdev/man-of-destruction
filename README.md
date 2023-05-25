@@ -15,7 +15,7 @@
 
 **Installation steps:**
 
-1. Download the latest release;
+1. Download the latest [release](/releases);
 2. Extract the downloaded archive;
 3. Run `ManOfDestruction.exe`.
 
