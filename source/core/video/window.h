@@ -13,6 +13,9 @@ struct WindowData
     std::function<void(int, int)> pOnMousePosition;
     std::function<void(int, int)> pOnResizeWindow;
 
+    int desiredWidth;
+    int desiredHeight;
+
     int width;
     int height;
     bool fullscreen;

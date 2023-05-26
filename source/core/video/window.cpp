@@ -11,7 +11,7 @@ Window* pWindow;
 // Initialise the window.
 
 Window::Window(int width, int height, std::string_view title)
-    : data{nullptr, nullptr, nullptr, nullptr, width, height, false}
+    : data{nullptr, nullptr, nullptr, nullptr, width, height, width, height, false}
 {
     pWindow = this;
 
@@ -129,6 +129,14 @@ void Window::SetResizeCallback(std::function<void(int width, int height)> pCallb
 
         pData->width = width;
         pData->height = height;
+
+        // Set the new desired width and height.
+
+        if (!pData->fullscreen)
+        {
+            pData->desiredWidth = width;
+            pData->desiredHeight = height;
+        }
     });
 }
 
@@ -155,7 +163,7 @@ void Window::ToggleFullscreen()
         GLFWmonitor* pMonitor = glfwGetWindowMonitor(pNativeWindow);
         const GLFWvidmode* pMode = glfwGetVideoMode(pMonitor);
 
-        glfwSetWindowMonitor(pNativeWindow, nullptr, 100, 100, 960, 720, pMode->refreshRate);
+        glfwSetWindowMonitor(pNativeWindow, nullptr, 100, 100, data.desiredWidth, data.desiredHeight, pMode->refreshRate);
         data.fullscreen = false;
     }
 
