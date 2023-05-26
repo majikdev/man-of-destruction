@@ -61,7 +61,7 @@ int main()
 
     Renderer renderer("assets/shaders/vertex.glsl", "assets/shaders/fragment.glsl");
     renderer.SetResolution(window.GetWidth(), window.GetHeight());
-    renderer.SetFontSheet(renderer.GetSheet("assets/sprites/widgets/charset.bmp"));
+    renderer.SetFontSheet(renderer.GetSheet("assets/sprites/widget/font.bmp"));
 
     SoundMixer soundMixer;
     soundMixer.SetMasterVolume(config.masterVolume);

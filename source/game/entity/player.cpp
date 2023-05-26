@@ -15,7 +15,7 @@ Player::Player(vector2f position)
       playerSprites(), hudSprites(), stepSounds(), hurtSound(), throwSound()
 {
     SpriteSheet playerSheet = pRenderer->GetSheet("assets/sprites/entity/player.bmp");
-    SpriteSheet uiSheet = pRenderer->GetSheet("assets/sprites/widgets/widgets.bmp");
+    SpriteSheet uiSheet = pRenderer->GetSheet("assets/sprites/widget/widget.bmp");
 
     for (int i = 0; i < 18; i++)
     {

@@ -23,7 +23,7 @@ Menu::Menu(int widgetCount)
 
     // Load the necessary resources.
 
-    SpriteSheet sheet = pRenderer->GetSheet("assets/sprites/widgets/widgets.bmp");
+    SpriteSheet sheet = pRenderer->GetSheet("assets/sprites/widget/widget.bmp");
     sprites[0] = sheet.GetSprite(0, 0, 64, 16);
     sprites[1] = sheet.GetSprite(64, 0, 64, 16);
     sprites[2] = sheet.GetSprite(0, 16, 64, 32);
