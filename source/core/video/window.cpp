@@ -179,6 +179,20 @@ void Window::Close()
     glfwSetWindowShouldClose(pNativeWindow, 1);
 }
 
+// Get the window's desired width.
+
+int Window::GetDesiredWidth() const
+{
+    return data.desiredWidth;
+}
+
+// Get the window's desired height.
+
+int Window::GetDesiredHeight() const
+{
+    return data.desiredHeight;
+}
+
 // Get the window's width.
 
 int Window::GetWidth() const

@@ -138,6 +138,8 @@ int main()
 
     // Save the current fullscreen mode to config.
 
+    config.windowWidth = window.GetDesiredWidth();
+    config.windowHeight = window.GetDesiredHeight();
     config.fullscreen = window.IsFullscreen();
 
     SAVE_METRICS("metrics.txt");

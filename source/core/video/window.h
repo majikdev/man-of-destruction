@@ -38,6 +38,8 @@ public:
     void ToggleFullscreen();
     void Close();
 
+    int GetDesiredWidth() const;
+    int GetDesiredHeight() const;
     int GetWidth() const;
     int GetHeight() const;
     bool IsFullscreen() const;
