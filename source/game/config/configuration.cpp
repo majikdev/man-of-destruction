@@ -34,11 +34,11 @@ Configuration::Configuration(std::string_view path)
 
     // Correct the values that are out of range.
 
-    cameraShake = Max(cameraShake, 0.0f);
-    pixelScale = Max(pixelScale, 1);
-
     windowWidth = Max(windowWidth, 960);
     windowHeight = Max(windowHeight, 720);
+
+    cameraShake = Max(cameraShake, 0.0f);
+    pixelScale = Clamp(pixelScale, 1, Min(windowWidth / 240, windowHeight / 180));
 
     masterVolume = Max(masterVolume, 0.0f);
 
