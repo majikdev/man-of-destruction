@@ -101,7 +101,7 @@ void Menu::Render() const
     }
 }
 
-// Add a widget to the menu.
+// Add a widget to the menu;
 // Alignment: 0.0 = left, 0.5 = centred, 1.0 = right.
 
 void Menu::AddWidget(float x, float y, int type, std::function<void(int)> pOnPress, std::string text, float alignment)
