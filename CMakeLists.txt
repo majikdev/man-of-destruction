@@ -24,7 +24,6 @@ link_directories(depend/glfw/lib)
 # Create and link executable.
 
 add_executable(ManOfDestruction
-    depend/glad/src/gl.c
     source/core/audio/sound.h
     source/core/audio/sound_mixer.cpp
     source/core/audio/sound_mixer.h
@@ -72,6 +71,7 @@ add_executable(ManOfDestruction
     source/game/save/save_slot.cpp
     source/game/save/save_slot.h
     source/main.cpp
+    depend/glad/src/gl.c
     ${ICON_RESOURCE})
 
 target_link_libraries(ManOfDestruction glfw3)
