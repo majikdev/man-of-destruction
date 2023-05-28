@@ -5,6 +5,7 @@
 
 struct SpriteSheet
 {
+public:
     Sprite GetSprite(int x, int y, int w, int h) const
     {
         y = imageHeight - y - h;
@@ -13,6 +14,7 @@ struct SpriteSheet
                             (float) w / (float) imageWidth, (float) h / (float) imageHeight};
     }
 
+public:
     unsigned int identifier;
     int imageWidth;
     int imageHeight;

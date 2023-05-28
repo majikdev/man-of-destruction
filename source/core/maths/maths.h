@@ -88,6 +88,7 @@ public:
 public:
     float x, y;
 
+public:
     static vector2f zero;
 };
 
