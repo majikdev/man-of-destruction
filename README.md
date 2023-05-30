@@ -2,7 +2,7 @@
 
 **Man of Destruction** is a two-dimensional puzzle game with emphasis on speed. 
 Cause destruction and create a path to more dynamite and the end of the level while avoiding your own explosions and the debris caused by them.
-This game is for the Microsoft Windows operating system.
+This game is for the _Microsoft Windows_ operating system.
 
 **In-game controls:**
 
@@ -24,7 +24,7 @@ This game is for the Microsoft Windows operating system.
 ### Custom levels
 
 Levels included in the base game can be replaced and custom levels can be added to the game.
-To create a level, run the level editor found in `tools/level_editor.py` using Python.
+To create a level, run the level editor found in `tools/level_editor.py` using _Python_.
 The level editor requires _Python 3.10_ or newer to be installed.
 
 **The following must be specified for a custom level:**
