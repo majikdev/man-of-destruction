@@ -23,7 +23,7 @@ Cause destruction and create a path to more dynamite and the end of the level wh
 ### Custom levels
 
 Levels included in the base game can be replaced and custom levels can be added to the game.
-To create a level, use the level editor found in `tools/level_editor.py`.
+To create a level, run the level editor found in `tools/level_editor.py` using Python.
 The level editor requires _Python 3.10_ or newer to be installed.
 
 **The following must be specified for a custom level:**
