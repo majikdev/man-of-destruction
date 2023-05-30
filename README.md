@@ -2,6 +2,7 @@
 
 **Man of Destruction** is a two-dimensional puzzle game with emphasis on speed. 
 Cause destruction and create a path to more dynamite and the end of the level while avoiding your own explosions and the debris caused by them.
+This game is for the Microsoft Windows operating system.
 
 **In-game controls:**
 
