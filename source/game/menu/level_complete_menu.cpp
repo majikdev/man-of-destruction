@@ -6,20 +6,20 @@
 // Initialise the menu.
 
 LevelCompleteMenu::LevelCompleteMenu(int index, std::string_view name)
-    : Menu(3),
-      completedIndex(index)
+    : completedIndex(index)
 {
-    AddWidget(0.0f,  1.25f, 1, nullptr, Level::FormatName(std::string(name)) + '\n' + Level::TimeToString(pLevel->GetTime()), 0.0f);
+    std::string text[2] = {Level::FormatName(std::string(name)), Level::TimeToString(pLevel->GetTime())};
+    AddLargeButton(0.0f, 1.25f, nullptr, text, 0.0f);
 
     bool hasNext = (index < levelCount - 1);
 
     if (hasNext)
     {
-        AddWidget(0.0f, -0.5f, 0, std::bind(&LevelCompleteMenu::OnPressNext, this), "Next");
+        AddSmallButton(0.0f, -0.5f, std::bind(&LevelCompleteMenu::OnPressNext, this), "Next", 0.5f);
     }
 
-    AddWidget(0.0f, hasNext ? -1.75f : -0.5f, 0, std::bind(&LevelCompleteMenu::OnPressRetry, this), "Retry");
-    AddWidget(0.0f, hasNext ? -3.0f : -1.75f, 0, std::bind(&LevelCompleteMenu::OnPressQuit, this),  "Quit");
+    AddSmallButton(0.0f, hasNext ? -1.75f : -0.5f, std::bind(&LevelCompleteMenu::OnPressRetry, this), "Retry", 0.5f);
+    AddSmallButton(0.0f, hasNext ? -3.0f : -1.75f, std::bind(&LevelCompleteMenu::OnPressQuit, this),  "Quit",  0.5f);
 }
 
 // Press next callback.

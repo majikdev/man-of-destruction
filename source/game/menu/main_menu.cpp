@@ -5,12 +5,11 @@
 // Initialise the menu.
 
 MainMenu::MainMenu()
-    : Menu(3)
 {
-    AddWidget(0.0f,  1.25f, 2, nullptr, "MAN OF DESTRUCTION");
+    AddString(0.0f, 1.25f, "MAN OF DESTRUCTION", 0.5f);
 
-    AddWidget(0.0f,   0.0f, 0, std::bind(&MainMenu::OnPressPlay, this), "Play");
-    AddWidget(0.0f, -1.25f, 0, std::bind(&MainMenu::OnPressQuit, this), "Quit");
+    AddSmallButton(0.0f,   0.0f, std::bind(&MainMenu::OnPressPlay, this), "Play", 0.5f);
+    AddSmallButton(0.0f, -1.25f, std::bind(&MainMenu::OnPressQuit, this), "Quit", 0.5f);
 }
 
 // Press play callback.

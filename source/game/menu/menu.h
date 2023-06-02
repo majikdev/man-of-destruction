@@ -7,23 +7,31 @@
 #include <string>
 #include <vector>
 
-struct WidgetType
+enum WidgetType
 {
-    vector2f bounds;
-
-    int spriteIndex;
+    BUTTON,
+    STRING
 };
 
 struct Widget
 {
+    WidgetType type;
     vector2f position;
     vector2f bounds;
 
-    int spriteIndex;
-    std::string text;
-    float alignment;
+    // Button widget.
 
     std::function<void(int)> pOnPress;
+
+    int spriteIndex;
+
+    // String widget.
+
+    std::string string;
+
+    float alignment;
+    float scrollTime;
+    int maxLength;
 };
 
 extern std::shared_ptr<class Menu> pMenu;
@@ -31,14 +39,16 @@ extern std::shared_ptr<class Menu> pMenu;
 class Menu
 {
 public:
-    Menu(int widgetCount);
+    Menu();
     virtual ~Menu() = default;
 
     void Update(float delta);
     void Render() const;
 
 protected:
-    void AddWidget(float x, float y, int type, std::function<void(int)> pOnPress, std::string text, float alignment = 0.5f);
+    void AddSmallButton(float x, float y, std::function<void(int)> pOnPress, std::string string, float alignment);
+    void AddLargeButton(float x, float y, std::function<void(int)> pOnPress, std::string string[2], float alignment);
+    void AddString(float x, float y, std::string string, float alignment);
     void ClearWidgets();
     void SetEscapeCallback(std::function<void()> pCallback);
 
@@ -51,7 +61,6 @@ public:
 
 protected:
     std::vector<Widget> widgets;
-    WidgetType widgetTypes[3];
     std::function<void()> pOnEscape;
 
     int hoveredWidget;

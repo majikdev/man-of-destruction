@@ -8,8 +8,7 @@
 // Initialise the menu.
 
 LevelSelectMenu::LevelSelectMenu()
-    : Menu(13),
-      currentPage(0)
+    : currentPage(0)
 {
     levels.reserve(levelCount);
 
@@ -94,13 +93,13 @@ void LevelSelectMenu::RefreshMenu()
 
     std::string pageText = "Page " + std::to_string(currentPage + 1) + " of " + std::to_string(totalPages);
 
-    AddWidget(-6.25f, 4.25f, 2, nullptr, std::move(pageText), 0.0f);
+    AddString(-6.25f, 4.25f, pageText, 0.0f);
 
     // Navigation buttons.
 
-    AddWidget(-4.25f, -4.25f, 0, std::bind(&LevelSelectMenu::OnPressBack, this),     "Back");
-    AddWidget(  0.0f, -4.25f, 0, std::bind(&LevelSelectMenu::OnPressPrevious, this), "Previous");
-    AddWidget( 4.25f, -4.25f, 0, std::bind(&LevelSelectMenu::OnPressNext, this),     "Next");
+    AddSmallButton(-4.25f, -4.25f, std::bind(&LevelSelectMenu::OnPressBack, this),     "Back",     0.5f);
+    AddSmallButton(  0.0f, -4.25f, std::bind(&LevelSelectMenu::OnPressPrevious, this), "Previous", 0.5f);
+    AddSmallButton( 4.25f, -4.25f, std::bind(&LevelSelectMenu::OnPressNext, this),     "Next",     0.5f);
 
     // Generate the level list.
 
@@ -113,23 +112,23 @@ void LevelSelectMenu::RefreshMenu()
         float y = (float) (i / 3 - 1) * -2.25f;
 
         std::string name = levels[beginning + i];
-        std::string text = Level::FormatName(name) + '\n';
+        std::string text[2] = {Level::FormatName(name), ""};
 
         // Level status.
 
         if (pSave->IsLevelCompleted(name))
         {
-            text += Level::TimeToString(pSave->GetLevelTime(name));
+            text[1] = Level::TimeToString(pSave->GetLevelTime(name));
         }
         else if (pSave->IsLevelUnlocked(name))
         {
-            text += "No time";
+            text[1] = "No time";
         }
         else
         {
-            text += "Locked";
+            text[1] = "Locked";
         }
 
-        AddWidget(x, y, 1, std::bind(&LevelSelectMenu::OnSelectLevel, this, i), std::move(text), 0.0f);
+        AddLargeButton(x, y, std::bind(&LevelSelectMenu::OnSelectLevel, this, i), text, 0.0f);
     }
 }

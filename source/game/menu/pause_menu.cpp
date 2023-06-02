@@ -6,11 +6,10 @@
 // Initialise the menu.
 
 PauseMenu::PauseMenu()
-    : Menu(3)
 {
-    AddWidget(0.0f,  1.25f, 0, std::bind(&PauseMenu::OnPressResume, this), "Resume");
-    AddWidget(0.0f,   0.0f, 0, std::bind(&PauseMenu::OnPressRetry, this),  "Retry");
-    AddWidget(0.0f, -1.25f, 0, std::bind(&PauseMenu::OnPressQuit, this),   "Quit");
+    AddSmallButton(0.0f,  1.25f, std::bind(&PauseMenu::OnPressResume, this), "Resume", 0.5f);
+    AddSmallButton(0.0f,   0.0f, std::bind(&PauseMenu::OnPressRetry, this),  "Retry",  0.5f);
+    AddSmallButton(0.0f, -1.25f, std::bind(&PauseMenu::OnPressQuit, this),   "Quit",   0.5f);
 
     // Pressing escape resumes the game.
 

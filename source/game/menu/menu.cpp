@@ -8,18 +8,10 @@ std::shared_ptr<Menu> pMenu;
 
 // Initialise the menu.
 
-Menu::Menu(int widgetCount)
+Menu::Menu()
     : hoveredWidget(-1), sprites(), hoverSound(), pressSound()
 {
     pMenu.reset(this);
-
-    widgets.reserve(widgetCount);
-
-    // Register the widget types.
-
-    widgetTypes[0] = {vector2f(4.0f, 1.0f), 0};  // Small button.
-    widgetTypes[1] = {vector2f(4.0f, 2.0f), 2};  // Big button.
-    widgetTypes[2] = {vector2f(0.0f, 1.0f), -1}; // String.
 
     // Load the necessary resources.
 
@@ -69,6 +61,23 @@ void Menu::Update(float delta)
         pSoundMixer->PlaySound(pressSound);
         pOnEscape();
     }
+
+    // Scroll the string widgets.
+
+    for (Widget& widget : widgets)
+    {
+        int stringLength = (int) widget.string.length();
+
+        if (widget.type == STRING && widget.maxLength != 0 && stringLength > widget.maxLength)
+        {
+            widget.scrollTime += delta * 2.0f;
+
+            if (widget.scrollTime >= (float) (stringLength - widget.maxLength + 1))
+            {
+                widget.scrollTime = 0.0f;
+            }
+        }
+    }
 }
 
 // Render the menu.
@@ -85,7 +94,7 @@ void Menu::Render() const
 
         // Draw the widget's sprite if applicable.
 
-        if (widget.spriteIndex >= 0)
+        if (widget.type == BUTTON)
         {
             const Sprite& sprite = sprites[i == hoveredWidget ? widget.spriteIndex + 1 : widget.spriteIndex];
 
@@ -94,24 +103,64 @@ void Menu::Render() const
 
         // Draw the widget's string.
 
-        float x = widget.position.x + Clamp(widget.bounds.x * widget.alignment, 0.25f, widget.bounds.x - 0.25f);
-        float y = widget.position.y + widget.bounds.y - 0.25f;
+        else
+        {
+            std::string string = widget.maxLength == 0 ? widget.string : widget.string.substr((int) widget.scrollTime, widget.maxLength);
+            float x = widget.position.x + Clamp(widget.bounds.x * widget.alignment, 0.25f, widget.bounds.x - 0.25f);
+            float y = widget.position.y + widget.bounds.y;
 
-        pRenderer->DrawString(widget.text, x, y, 4.0f, widget.alignment);
+            pRenderer->DrawString(string, x, y, 4.0f, widget.alignment);
+        }
     }
 }
 
-// Add a widget to the menu;
-// Alignment: 0.0 = left, 0.5 = centred, 1.0 = right.
+// Add a small button with a one-line string.
 
-void Menu::AddWidget(float x, float y, int type, std::function<void(int)> pOnPress, std::string text, float alignment)
+void Menu::AddSmallButton(float x, float y, std::function<void(int)> pOnPress, std::string string, float alignment)
 {
-    vector2f bounds = widgetTypes[type].bounds;
     vector2f position(x, y);
+    vector2f bounds(4.0f, 1.0f);
+
+    widgets.reserve(2);
 
     position -= bounds * 0.5f;
+    widgets.push_back({BUTTON, position, bounds, std::move(pOnPress), 0, "", 0.0f, 0.0f, 0});
 
-    widgets.push_back({position, bounds, widgetTypes[type].spriteIndex, std::move(text), alignment, std::move(pOnPress)});
+    // One line of text.
+
+    position.y -= 0.25f;
+    widgets.push_back({STRING, position, bounds, nullptr, 0, std::move(string), alignment, 0.0f, 9});
+}
+
+// Add a large button with a two-line string.
+
+void Menu::AddLargeButton(float x, float y, std::function<void(int)> pOnPress, std::string string[2], float alignment)
+{
+    vector2f position(x, y);
+    vector2f bounds(4.0f, 2.0f);
+
+    widgets.reserve(3);
+
+    position -= bounds * 0.5f;
+    widgets.push_back({BUTTON, position, bounds, std::move(pOnPress), 2, "", 0.0f, 0.0f, 0});
+
+    // Two lines of text.
+
+    position.y -= 0.375f;
+    widgets.push_back({STRING, position, bounds, nullptr, 0, std::move(string[0]), alignment, 0.0f, 9});
+
+    position.y -= 0.75f;
+    widgets.push_back({STRING, position, bounds, nullptr, 0, std::move(string[1]), alignment, 0.0f, 9});
+}
+
+// Add a string widget.
+
+void Menu::AddString(float x, float y, std::string string, float alignment)
+{
+    vector2f position(x, y - 0.25f);
+    vector2f bounds(0.0f, 1.0f);
+
+    widgets.push_back({STRING, position, bounds, nullptr, 0, std::move(string), alignment, 0.0f, 0});
 }
 
 // Clear the menu widgets.
