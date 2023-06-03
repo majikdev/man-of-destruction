@@ -12,7 +12,7 @@ LevelSelectMenu::LevelSelectMenu()
 {
     levels.reserve(levelCount);
 
-    // Populate the level list.
+    // Preload all level names and page count.
 
     for (std::string_view name : levelList)
     {
@@ -33,6 +33,8 @@ LevelSelectMenu::LevelSelectMenu()
     }
 
     totalPages = ((int) levels.size() - 1) / 9 + 1;
+
+    // Draw the menu widgets.
 
     RefreshMenu();
 
@@ -76,6 +78,8 @@ void LevelSelectMenu::OnSelectLevel(int index)
 {
     std::string_view name = levels[currentPage * 9 + index];
 
+    // Load the level if it is unlocked.
+
     if (pSave->IsLevelUnlocked(name))
     {
         Level::Load(name);
@@ -92,7 +96,6 @@ void LevelSelectMenu::RefreshMenu()
     // Page indicator.
 
     std::string pageText = "Page " + std::to_string(currentPage + 1) + " of " + std::to_string(totalPages);
-
     AddString(-6.25f, 4.25f, pageText, 0.0f);
 
     // Navigation buttons.
@@ -101,7 +104,7 @@ void LevelSelectMenu::RefreshMenu()
     AddSmallButton(  0.0f, -4.25f, std::bind(&LevelSelectMenu::OnPressPrevious, this), "Previous", 0.5f);
     AddSmallButton( 4.25f, -4.25f, std::bind(&LevelSelectMenu::OnPressNext, this),     "Next",     0.5f);
 
-    // Generate the level list.
+    // Listed level buttons.
 
     int beginning = currentPage * 9;
     int count = Min((int) levels.size() - beginning, 9);
@@ -114,7 +117,7 @@ void LevelSelectMenu::RefreshMenu()
         std::string name = levels[beginning + i];
         std::string text[2] = {Level::FormatName(name), ""};
 
-        // Level status.
+        // Choose a level status.
 
         if (pSave->IsLevelCompleted(name))
         {

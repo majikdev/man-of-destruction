@@ -39,7 +39,7 @@ static std::string LoadShaderFile(std::string_view path)
     return std::move(source);
 }
 
-// Load image data from a file.
+// Load bitmap image data from a file.
 
 static std::vector<unsigned char> LoadImageFile(std::string_view path, int& outWidth, int& outHeight)
 {
