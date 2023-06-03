@@ -95,8 +95,8 @@ void LevelSelectMenu::RefreshMenu()
 
     // Page indicator.
 
-    std::string pageText = "Page " + std::to_string(currentPage + 1) + " of " + std::to_string(totalPages);
-    AddString(-6.25f, 4.25f, pageText, 0.0f);
+    std::string pageString = "Page " + std::to_string(currentPage + 1) + " of " + std::to_string(totalPages);
+    AddString(-6.25f, 4.25f, pageString, 0.0f);
 
     // Navigation buttons.
 
