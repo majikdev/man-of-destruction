@@ -304,7 +304,7 @@ SpriteSheet Renderer::GetSheet(std::string_view path)
         return sheets.at(path);
     }
 
-    // Otherwise, load the sprite sheet from a file.
+    // Setup an OpenGL texture.
 
     unsigned int texture;
     glGenTextures(1, &texture);
@@ -315,7 +315,7 @@ SpriteSheet Renderer::GetSheet(std::string_view path)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    // Push an image's pixel data into the texture.
+    // Load an image into the OpenGL texture.
 
     int width, height;
     std::vector<unsigned char> pixels = LoadImageFile(path, width, height);
